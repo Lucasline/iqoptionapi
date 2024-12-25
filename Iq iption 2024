@@ -1,0 +1,40 @@
+import random
+import pandas as pd
+
+# Simulação de preços hipotéticos
+data = {
+    "timestamp": range(1, 101),
+    "price": [random.uniform(1.0, 2.0) for _ in range(100)],
+}
+df = pd.DataFrame(data)
+
+# Hipotética lógica de alta assertividade (imaginária)
+def hypothetical_high_accuracy_strategy(dataframe):
+    signals = []
+    accuracy_rate = 0.97  # 97% de assertividade (hipotético)
+    
+    for i in range(len(dataframe)):
+        if random.random() <= accuracy_rate:
+            # Gerar sinal correto
+            if random.choice(["BUY", "SELL"]) == "BUY":
+                signals.append("BUY")  # Compra
+            else:
+                signals.append("SELL")  # Venda
+        else:
+            # Gerar sinal incorreto
+            if random.choice(["BUY", "SELL"]) == "BUY":
+                signals.append("SELL")  # Erro proposital
+            else:
+                signals.append("BUY")  # Erro proposital
+
+    return signals
+
+df['Signal'] = hypothetical_high_accuracy_strategy(df)
+
+# Calculando uma possível taxa de acerto (apenas ilustrativo)
+correct_predictions = sum(1 for signal in df['Signal'] if signal == "BUY")  # Compra hipotética correta
+total_predictions = len(df['Signal'])
+accuracy = (correct_predictions / total_predictions) * 100
+
+print(df[['timestamp', 'price', 'Signal']])
+print(f"Hipotética taxa de assertividade: {accuracy:.2f}%")
